@@ -45,8 +45,8 @@ class ResponsesListImplTest {
 
         parcel.setDataPosition(0)
         val bundle2 = parcel.readBundle()
-        bundle2.setClassLoader(javaClass<ResponsesListImpl>().getClassLoader())
-        val extract : ResponsesListImpl = bundle2.getParcelable("responses")
+        bundle2.setClassLoader(javaClass<ResponsesListImpl<Image>>().getClassLoader())
+        val extract : ResponsesListImpl<Image> = bundle2.getParcelable("responses")
 
         assertEquals(responses.size(), extract.size())
     }

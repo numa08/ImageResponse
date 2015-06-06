@@ -5,13 +5,13 @@ import android.os.Parcelable
 import numa08.net.tiqa4k.ResponseList
 import java.util.*
 
-class ResponsesListImpl : ResponseList<Parcelable>, ArrayList<Parcelable> {
+class ResponsesListImpl<T> : ResponseList<T>, ArrayList<T> where T : Parcelable {
 
     constructor() : super() {}
 
     constructor(size : Int) : super(size) {}
 
-    constructor(col : Collection<out Parcelable>) : super(col) {}
+    constructor(col : Collection<T>) : super(col) {}
 
     private constructor(source : Parcel) {
         val className = source.readString()
@@ -35,9 +35,9 @@ class ResponsesListImpl : ResponseList<Parcelable>, ArrayList<Parcelable> {
     override fun describeContents(): Int = 0
 
     companion object parcelable {
-        val CREATOR : Parcelable.Creator<ResponsesListImpl> = object : Parcelable.Creator<ResponsesListImpl> {
-            override fun createFromParcel(source: Parcel): ResponsesListImpl? = ResponsesListImpl(source)
-            override fun newArray(size: Int): Array<out ResponsesListImpl>?  = Array(size, {i -> ResponsesListImpl()})
+        val CREATOR : Parcelable.Creator<ResponsesListImpl<Parcelable>> = object : Parcelable.Creator<ResponsesListImpl<Parcelable>> {
+            override fun createFromParcel(source: Parcel): ResponsesListImpl<Parcelable>? = ResponsesListImpl(source)
+            override fun newArray(size: Int): Array<out ResponsesListImpl<Parcelable>>?  = Array(size, {i -> ResponsesListImpl<Parcelable>()})
 
         }
     }
