@@ -1,11 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
+
     defaultConfig {
-        applicationId "numa08.net.imageresponse"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -23,10 +23,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile project(':volley')
 }
 buildscript {
     ext.kotlin_version = '0.12.213'
