@@ -3,7 +3,10 @@ package numa08.net.tiqa4k.impl
 import android.os.Parcel
 import android.os.Parcelable
 import numa08.net.tiqa4k.Image
+import numa08.net.tiqa4k.ResponseList
 import org.json.JSONObject
+import java.io.BufferedInputStream
+import java.net.HttpURLConnection
 
 open class ImageJsonImpl : Image {
 
@@ -54,6 +57,16 @@ open class ImageJsonImpl : Image {
     }
 
     override fun describeContents(): Int = 0
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        val otherImage = other as? Image
+        val retval = otherImage?.id == id
+        return retval
+    }
 
     companion object parcelableCreator {
         val CREATOR : Parcelable.Creator<ImageJsonImpl> = object : Parcelable.Creator<ImageJsonImpl> {

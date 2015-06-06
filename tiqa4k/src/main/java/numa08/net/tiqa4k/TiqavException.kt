@@ -1,3 +1,7 @@
 package numa08.net.tiqa4k
 
-data public class TiqavException(detailMessage: String?) : Exception(detailMessage) {}
+public class TiqavException : Exception {
+    constructor(th : Throwable) : super(th) {}
+    constructor(me : String, th : Throwable) : super(me, th) {}
+    constructor(me : String) : super(me)
+}
