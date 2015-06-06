@@ -2,6 +2,7 @@ package numa08.net.tiqa4k.impl
 
 import android.os.Bundle
 import android.os.Parcel
+import numa08.net.tiqa4k.http.HttpResponse
 import numa08.net.tiqa4k_test.BuildConfig
 import org.hamcrest.CoreMatchers
 import org.json.JSONArray
@@ -10,8 +11,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import test.JSONArrayHttpConnection
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 RunWith(RobolectricTestRunner::class)
 Config(constants = BuildConfig::class)
@@ -52,5 +55,15 @@ public class ImageJsonImplTest {
         assertEquals(image.height, extract.height)
         assertEquals(image.width, extract.width)
         assertEquals(image.sourceURL, extract.sourceURL)
+    }
+
+    Test fun createImagesList() {
+        val conn = JSONArrayHttpConnection()
+        val resp = HttpResponse(conn)
+        val list = ImageJsonImpl.CreateImagesList(resp)
+
+        assertNotNull(list)
+        assertEquals(list.size(), 2)
+        assertEquals(list.get(0).id, "3om")
     }
 }

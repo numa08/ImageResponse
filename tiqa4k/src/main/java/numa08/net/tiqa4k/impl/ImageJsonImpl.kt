@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import numa08.net.tiqa4k.Image
 import numa08.net.tiqa4k.ResponseList
+import numa08.net.tiqa4k.http.HttpResponse
 import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.net.HttpURLConnection
@@ -72,6 +73,24 @@ open class ImageJsonImpl : Image {
         val CREATOR : Parcelable.Creator<ImageJsonImpl> = object : Parcelable.Creator<ImageJsonImpl> {
             override fun createFromParcel(source: Parcel): ImageJsonImpl? = ImageJsonImpl(source)
             override fun newArray(size: Int): Array<out ImageJsonImpl>?  = Array(size, {i -> ImageJsonImpl()})
+        }
+
+        fun CreateImagesList(resp: HttpResponse): ResponseList<Image> {
+            val jsonArray = resp.asJSONArray
+            val list = if (jsonArray != null) {
+                val images = ResponsesListImpl<Image>(jsonArray.length())
+                var i = 0
+                while(i < jsonArray.length()) {
+                    val obj = jsonArray.getJSONObject(i)
+                    val image = ImageJsonImpl(obj)
+                    images.add(image)
+                    i++
+                }
+                images
+            } else {
+                ResponsesListImpl<Image>()
+            }
+            return list
         }
     }
 }
