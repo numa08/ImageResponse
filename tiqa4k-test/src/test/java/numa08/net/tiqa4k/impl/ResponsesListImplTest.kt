@@ -13,8 +13,8 @@ import org.robolectric.annotation.Config
 import java.util.*
 import kotlin.test.assertEquals
 
-RunWith(javaClass<RobolectricTestRunner>())
-Config(constants = javaClass<BuildConfig>())
+RunWith(RobolectricTestRunner::class)
+Config(constants = BuildConfig::class)
 class ResponsesListImplTest {
 
     var rawJson : String = """

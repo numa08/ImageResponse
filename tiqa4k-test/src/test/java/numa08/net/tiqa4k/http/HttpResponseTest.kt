@@ -11,8 +11,8 @@ import java.net.URL
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-RunWith(javaClass<RobolectricTestRunner>())
-Config(constants = javaClass<BuildConfig>())
+RunWith(RobolectricTestRunner::class)
+Config(constants = BuildConfig::class)
 class HttpResponseTest {
 
     Test fun loadJSONArray() {

@@ -13,8 +13,8 @@ import org.robolectric.annotation.Config
 import java.io.File
 import kotlin.test.assertEquals
 
-RunWith(javaClass<RobolectricTestRunner>())
-Config(constants = javaClass<BuildConfig>())
+RunWith(RobolectricTestRunner::class)
+Config(constants = BuildConfig::class)
 public class ImageJsonImplTest {
 
     var rawJson : String = """
