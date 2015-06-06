@@ -5,6 +5,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import test.JSONArrayHttpConnection
+import test.JSONObjectHttpConnection
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -31,29 +33,5 @@ class HttpResponseTest {
 
         assertNotNull(jsonObject)
         assertEquals(jsonObject?.getString("id"), "3om")
-    }
-}
-
-private class JSONArrayHttpConnection : HttpURLConnection(URL("http://google.com")) {
-    override fun connect() {}
-
-    override fun usingProxy(): Boolean = false
-
-    override fun disconnect() {}
-
-    override fun getInputStream(): InputStream? {
-        return javaClass<JSONArrayHttpConnection>().getClassLoader().getResourceAsStream("test_json_array.json")
-    }
-}
-
-private class JSONObjectHttpConnection : HttpURLConnection(URL("http://google.com")) {
-    override fun connect() {}
-
-    override fun usingProxy(): Boolean = false
-
-    override fun disconnect() {}
-
-    override fun getInputStream(): InputStream? {
-        return javaClass<JSONArrayHttpConnection>().getClassLoader().getResourceAsStream("test_json_object.json")
     }
 }
